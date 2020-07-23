@@ -19,6 +19,7 @@ steps:
         scipy \
         pandas \
         matplotlib \
+        matplotlib-base \
         dask \
         distributed \
         zarr \
