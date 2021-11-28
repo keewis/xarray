@@ -168,7 +168,7 @@ def equivalent(first: T, second: T) -> bool:
 
     if isinstance(first, np.ndarray) or isinstance(second, np.ndarray):
         return duck_array_ops.array_equiv(first, second)
-    elif isinstance(first, list) or isinstance(second, list):
+    elif isinstance(first, list) and isinstance(second, list):
         return list_equiv(first, second)
     else:
         return (

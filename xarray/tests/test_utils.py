@@ -138,6 +138,7 @@ class TestDictionaries:
         assert utils.equivalent(np.array([0]), [0])
         assert utils.equivalent(np.arange(3), 1.0 * np.arange(3))
         assert not utils.equivalent(0, np.zeros(3))
+        assert not utils.equivalent([0], 0)
 
     def test_safe(self):
         # should not raise exception:
