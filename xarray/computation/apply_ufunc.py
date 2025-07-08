@@ -25,6 +25,7 @@ from typing import TYPE_CHECKING, Any, Literal
 import numpy as np
 
 from xarray.core import duck_array_ops, utils
+from xarray.core.datatree import DataTree
 from xarray.core.formatting import limit_lines
 from xarray.core.indexes import Index, filter_indexes_from_coords
 from xarray.core.options import _get_keep_attrs
@@ -1249,6 +1250,8 @@ def apply_ufunc(
             dask_gufunc_kwargs=dask_gufunc_kwargs,
         )
         return apply_groupby_func(this_apply, *args)
+    elif any(isinstance(a, DataTree) for a in args):
+        raise ValueError("apply_ufunc does not support DataTree objects, yet")
     # feed datasets apply_variable_ufunc through apply_dataset_vfunc
     elif any(is_dict_like(a) for a in args):
         return apply_dataset_vfunc(
