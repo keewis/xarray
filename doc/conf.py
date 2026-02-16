@@ -187,10 +187,13 @@ global_enable_try_examples = True
 try_examples_global_button_text = "Try it in your browser!"
 try_examples_global_warning_text = "Interactive examples are experimental and may not always work as expected."
 
-def try_examples_preamble():
-    import numpy as np
-    import pandas as pd
-    import xarray as xr
+try_examples_preamble = """
+import numpy as np
+import pandas as pd
+import xarray as xr
+
+np.random.seed(0)
+"""
 
 # mermaid config
 mermaid_version = "11.6.0"
