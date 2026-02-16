@@ -49,7 +49,7 @@ class TreeNode:
 
     This class stores no data, it has only parents and children attributes, and various methods.
 
-    Stores child nodes in an dict, ensuring that equality checks between trees
+    Stores child nodes in a dict, ensuring that equality checks between trees
     and order of child nodes is preserved (since python 3.7).
 
     Nodes themselves are intrinsically unnamed (do not possess a ._name attribute), but if the node has a parent you can
@@ -310,7 +310,7 @@ class TreeNode:
         warn(
             "`iter_lineage` has been deprecated, and in the future will raise an error."
             "Please use `parents` from now on.",
-            DeprecationWarning,
+            FutureWarning,
             stacklevel=2,
         )
         return (self, *self.parents)
@@ -323,7 +323,7 @@ class TreeNode:
         warn(
             "`lineage` has been deprecated, and in the future will raise an error."
             "Please use `parents` from now on.",
-            DeprecationWarning,
+            FutureWarning,
             stacklevel=2,
         )
         return self.iter_lineage()
@@ -342,7 +342,7 @@ class TreeNode:
         warn(
             "`ancestors` has been deprecated, and in the future will raise an error."
             "Please use `parents`. Example: `tuple(reversed(node.parents))`",
-            DeprecationWarning,
+            FutureWarning,
             stacklevel=2,
         )
         return (*reversed(self.parents), self)
@@ -830,7 +830,7 @@ def group_subtrees(
     TreeIsomorphismError
         If trees are not isomorphic, i.e., they have different structures.
 
-    See also
+    See Also
     --------
     DataTree.subtree
     DataTree.subtree_with_keys

@@ -223,7 +223,7 @@ def decode_cf_variable(
                     "Example usage:\n"
                     "    time_coder = xr.coders.CFDatetimeCoder(use_cftime=True)\n"
                     "    ds = xr.open_dataset(decode_times=time_coder)\n",
-                    DeprecationWarning,
+                    FutureWarning,
                 )
             decode_times = CFDatetimeCoder(use_cftime=use_cftime)
         elif use_cftime is not None:
@@ -422,7 +422,8 @@ def decode_cf_variables(
                 decode_timedelta=_item_or_default(decode_timedelta, k, None),
             )
         except Exception as e:
-            raise type(e)(f"Failed to decode variable {k!r}: {e}") from e
+            e.add_note(f"Raised while decoding variable {k!r} with value {v!r}")
+            raise
         if decode_coords in [True, "coordinates", "all"]:
             var_attrs = new_vars[k].attrs
             if "coordinates" in var_attrs:

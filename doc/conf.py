@@ -20,14 +20,6 @@ allowed_failures = set()
 
 print("python exec:", sys.executable)
 print("sys.path:", sys.path)
-
-if "CONDA_DEFAULT_ENV" in os.environ or "conda" in sys.executable:
-    print("conda environment:")
-    subprocess.run([os.environ.get("CONDA_EXE", "conda"), "list"])
-else:
-    print("pip environment:")
-    subprocess.run([sys.executable, "-m", "pip", "list"])
-
 print(f"xarray: {xarray.__version__}, {xarray.__file__}")
 
 with suppress(ImportError):
@@ -62,6 +54,7 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
     "jupyter_sphinx",
+    "myst_parser",
     "nbsphinx",
     "sphinx_autosummary_accessors",
     "sphinx.ext.linkcode",
@@ -72,6 +65,7 @@ extensions = [
     "sphinx_inline_tabs",
     "sphinx_remove_toctrees",
     "jupyterlite_sphinx",
+    "sphinx_llm.txt",
 ]
 
 
@@ -212,9 +206,7 @@ language = "en"
 project = "xarray"
 copyright = f"2014-{datetime.datetime.now().year}, xarray Developers"
 
-# The short Y.M.D version.
-v = packaging.version.parse(xarray.__version__)
-version = ".".join(str(p) for p in v.release)
+version = xarray.__version__
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -290,6 +282,10 @@ html_favicon = "_static/logos/Xarray_Icon_Final.svg"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 html_css_files = ["style.css"]
+
+linkcheck_exclude_documents = [
+    r'whats-new.*', # Allow broken links in old release notes
+]
 
 
 # configuration for sphinxext.opengraph

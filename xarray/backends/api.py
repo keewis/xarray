@@ -265,6 +265,7 @@ def _chunk_ds(
             inline_array=inline_array,
             chunked_array_type=chunkmanager,
             from_array_kwargs=from_array_kwargs.copy(),
+            just_use_token=True,
         )
     return backend_ds._replace(variables)
 
@@ -650,7 +651,7 @@ def open_dataarray(
     backend_kwargs: dict[str, Any] | None = None,
     **kwargs,
 ) -> DataArray:
-    """Open an DataArray from a file or file-like object containing a single
+    """Open a DataArray from a file or file-like object containing a single
     data variable.
 
     This is designed to read netCDF files with only one data variable. If
@@ -805,7 +806,7 @@ def open_dataarray(
     All parameters are passed directly to `xarray.open_dataset`. See that
     documentation for further details.
 
-    See also
+    See Also
     --------
     open_dataset
     """
@@ -1420,10 +1421,10 @@ def open_mfdataset(
     chunks : int, dict, 'auto' or None, optional
         Dictionary with keys given by dimension names and values given by chunk sizes.
         In general, these should divide the dimensions of each dataset. If int, chunk
-        each dimension by ``chunks``. By default, chunks will be chosen to load entire
-        input files into memory at once. This has a major impact on performance: please
-        see the full documentation for more details [2]_. This argument is evaluated
-        on a per-file basis, so chunk sizes that span multiple files will be ignored.
+        each dimension by ``chunks``. By default, chunks will be chosen to match the
+        chunks on disk. This may impact performance: please see the full documentation
+        for more details [2]_. This argument is evaluated on a per-file basis, so chunk
+        sizes that span multiple files will be ignored.
     concat_dim : str, DataArray, Index or a Sequence of these or None, optional
         Dimensions to concatenate files along.  You only need to provide this argument
         if ``combine='nested'``, and if any of the dimensions along which you want to
@@ -1463,7 +1464,7 @@ def open_mfdataset(
         "netcdf4" over "h5netcdf" over "scipy" (customizable via
         ``netcdf_engine_order`` in ``xarray.set_options()``). A custom backend
         class (a subclass of ``BackendEntrypoint``) can also be used.
-    data_vars : {"minimal", "different", "all"} or list of str, default: "all"
+    data_vars : {"minimal", "different", "all", None} or list of str, default: "all"
         These data variables will be concatenated together:
           * "minimal": Only data variables in which the dimension already
             appears are included.
@@ -1473,9 +1474,12 @@ def open_mfdataset(
             load the data payload of data variables into memory if they are not
             already loaded.
           * "all": All data variables will be concatenated.
+          * None: Means ``"all"`` if ``concat_dim`` is not present in any of
+            the ``objs``, and ``"minimal"`` if ``concat_dim`` is present
+            in any of ``objs``.
           * list of str: The listed data variables will be concatenated, in
             addition to the "minimal" data variables.
-    coords : {"minimal", "different", "all"} or list of str, optional
+    coords : {"minimal", "different", "all"} or list of str, default: "different"
         These coordinate variables will be concatenated together:
          * "minimal": Only coordinates in which the dimension already appears
            are included.
