@@ -244,8 +244,9 @@ jupyterlite-sphinx = ">=0.22.1"
 jupyterlite-xeus = ">=4.4.1"
 
 [feature.doc.tasks]
-doc = { cmd = "make html", cwd = "doc", description = "Build the HTML documentation." }
-doc-clean = { cmd = "make clean && make html", cwd = "doc", description = "Clean build artifacts and rebuild the HTML documentation from scratch." }
+_prepare-environment = { cmd = "python create_environment.py", cwd = "doc"}
+doc = { cmd = "make html", cwd = "doc", description = "Build the HTML documentation.", depends-on = [ "_prepare-environment" ] }
+doc-clean = { cmd = "make clean && make html", cwd = "doc", description = "Clean build artifacts and rebuild the HTML documentation from scratch.", depends-on = [ "build", "_prepare-environment" ] }
 linkcheck = { cmd = "make linkcheck", cwd = "doc", description = "Check URLs in documentation." }
 
 
