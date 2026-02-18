@@ -240,7 +240,7 @@ sphinxext-opengraph = "*"
 sphinxext-rediraffe = "*"
 cfgrib = "*"
 myst-parser = "*"
-jupyterlite-sphinx = ">=0.22.0"
+jupyterlite-sphinx = ">=0.22.1"
 jupyterlite-xeus = ">=4.4.1"
 
 [feature.doc.tasks]
