@@ -189,6 +189,8 @@ import xarray as xr
 np.random.seed(0)
 """
 
+jupyterlite_silence = False
+
 # mermaid config
 mermaid_version = "11.6.0"
 
