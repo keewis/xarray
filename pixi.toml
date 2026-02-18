@@ -252,6 +252,7 @@ doc-clean = { cmd = "make clean && make html", cwd = "doc", description = "Clean
   "build",
   "_prepare-environment",
 ] }
+host-static-doc = { cmd = "python -m http.server -b 127.0.0.1 -d _build/html 5455", cwd = "doc", description = "serve the static documentation" }
 linkcheck = { cmd = "make linkcheck", cwd = "doc", description = "Check URLs in documentation." }
 
 
@@ -372,6 +373,13 @@ cmd = [
 ]
 cwd = "."
 depends-on = ["prepare-recipe"]
+
+[tasks]
+build-and-host-doc = [
+  { task = "build" },
+  { task = "doc" },
+  { task = "host-static-doc" },
+]
 
 [environments]
 # Testing
