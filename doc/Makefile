@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS      =
 SPHINXBUILD     = sphinx-build
-SPHINXATUOBUILD = sphinx-autobuild
+SPHINXAUTOBUILD = sphinx-autobuild
 PAPER           =
 BUILDDIR        = _build
 
@@ -68,8 +68,8 @@ rtdhtml:
 
 .PHONY: livehtml
 livehtml:
-	# @echo "$(SPHINXATUOBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html"
-	$(SPHINXATUOBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	# @echo "$(SPHINXAUTOBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html"
+	$(SPHINXAUTOBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 
 .PHONY: dirhtml
 dirhtml:
