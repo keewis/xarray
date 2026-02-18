@@ -187,7 +187,7 @@ import pandas as pd
 import xarray as xr
 
 np.random.seed(0)
-"""
+""".strip()
 root = pathlib.Path(__file__).parent
 root.joinpath("_contents").mkdir(exist_ok=True)
 
