@@ -188,7 +188,9 @@ import xarray as xr
 
 np.random.seed(0)
 """.strip()
+
 root = pathlib.Path(__file__).parent
+print(f"[jupyterlite-sphinx setup] creating {root / '_contents'}")
 root.joinpath("_contents").mkdir(exist_ok=True)
 
 jupyterlite_silence = False
