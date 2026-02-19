@@ -21,4 +21,5 @@ build:
       - pixi install -e doc
     build:
       html:
+        - pixi run build
         - pixi run doc BUILDDIR=$READTHEDOCS_OUTPUT
