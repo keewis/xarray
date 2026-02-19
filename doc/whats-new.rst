@@ -31,6 +31,8 @@ Bug Fixes
 
 Documentation
 ~~~~~~~~~~~~~
+- Use ``jupyterlite-sphinx`` to provide interactive examples (:pull:`10299`).
+  By `Justus Magin <https://github.com/keewis>`_.
 
 
 Internal Changes
