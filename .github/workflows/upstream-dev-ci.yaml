@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: cache-pixi-lock
     if: |
-      always() && needs.cache-pixi-lock.conclusion == 'success'
+      always() && needs.cache-pixi-lock.result == 'success'
     defaults:
       run:
         shell: bash -l {0}
